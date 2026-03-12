@@ -17,11 +17,14 @@ export class HomePage {
   isGain: boolean = false;
   triggerPrice: number | null = null;
   triggerPriceHit: boolean = false
+  isFeedActive: boolean = false;
 
   beginTradingDay(): void {
+    this.isFeedActive = true;
     this.chartComponent.beginTrading();
   }
   stopTradingDay(): void {
+    this.isFeedActive = false;
     this.chartComponent.stopTrading();
   }
   

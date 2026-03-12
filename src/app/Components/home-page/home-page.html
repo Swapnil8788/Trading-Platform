@@ -3,6 +3,9 @@
         <span [ngClass]="[isGain ? 'gain': 'loss']">{{stockPrice | number:'1.2-2'}}</span>
         <span [ngClass]="[isGain ? 'gain': 'loss']">({{stockPriceChange | number:'1.2-2'}})</span>
         <span [ngClass]="[isGain ? 'gain': 'loss']">{{isGain ? '▲' : '▼'}}</span>
+        <span class="connection-status" [ngClass]="isFeedActive ? 'status-active' : 'status-paused'">
+            {{ isFeedActive ? '● Active' : '○ Paused' }}
+        </span>
     </h3>
 </div>
 <app-chart #chartComponent [triggerPriceHit]="triggerPriceHit" (stockPriceUpdated)="onStockPriceUpdated($event)"></app-chart>

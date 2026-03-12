@@ -61,7 +61,7 @@
     font-size: 16px;
     font-weight: bold;
 }
-.stock-price-title{
+.stock-price-title {
     font-size: 24px;
     font-weight: bold;
     color: darkblue;
@@ -70,7 +70,22 @@
     margin-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
-    margin-bottom: 10px;
+}
+.connection-status {
+    margin-left: 16px;
+    font-size: 16px;
+    font-weight: normal;
+}
+.status-active {
+    color: green;
+}
+.status-paused {
+    color: #666;
+}
+.threshold-error {
+    color: #c00;
+    margin: 8px 20px;
+    font-size: 14px;
 }
 .arrow {
     margin-left: 0.25em;
