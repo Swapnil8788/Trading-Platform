@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container .topbar-container{
+    height: 7%;
+    width: 100%;
+}
+
+.container .home-page-container{
+    height: 93%;
+    width: 100%;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
