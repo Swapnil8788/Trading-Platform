@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ChartComponent } from './chart/chart';
 
 @Component({
@@ -8,5 +8,12 @@ import { ChartComponent } from './chart/chart';
   styleUrl: './home-page.scss',
 })
 export class HomePage {
-
+  @ViewChild('chartComponent') chartComponent!: ChartComponent;
+  
+  beginTradingDay(): void {
+    this.chartComponent.beginTrading();
+  }
+  stopTradingDay(): void {
+    this.chartComponent.stopTrading();
+  }
 }

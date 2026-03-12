@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import type { ChartConfiguration } from 'chart.js';
+import { Data } from '../../../Services/data';
 
 @Component({
   selector: 'app-chart',
@@ -15,10 +16,23 @@ import type { ChartConfiguration } from 'chart.js';
   styleUrl: './chart.scss',
 })
 export class ChartComponent implements AfterViewInit, OnDestroy {
+  startTime: Date = new Date(new Date().setHours(9,30,10,0));
+  
+  constructor(private dataService: Data) {}
+
+  ngOnInit(): void {
+    this.dataService.stockPrice$.subscribe((price)=>{
+      this.stockPriceData.push(price);
+      this.startTime.setSeconds(this.startTime.getSeconds() + 2);
+      this.timeData.push(this.startTime.toLocaleTimeString() + "AM");
+      this.chart?.update();    
+    })
+  }
+
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
   private chart: Chart<'line'> | null = null;
-  private stockPriceData: number[] = [12, 19, 15, 25, 22, 37, 2, 14,16, 13, 35,89, 31];
-  private timeData: string[] = ["9:30:00AM", "9:30:02AM", "9:30:04AM", "9:30:06AM", "9:30:08AM", "9:30:10AM", "9:30:12AM", "9:30:14AM", "9:30:16AM", "9:30:18AM", "9:30:20AM", "9:30:22AM", "9:30:24AM","9:30:26AM","9:30:28AM"];
+  private stockPriceData: number[] = [];
+  private timeData: string[] = ["9:30:00 AM","9:30:02 AM","9:30:04 AM","9:30:06 AM","9:30:08 AM","9:30:10 AM"];
   // we need to wait till viewchild is initialized
   ngAfterViewInit(): void {
     this.initChart();
@@ -87,5 +101,12 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     if (ctx) {
       this.chart = new Chart(ctx, config);
     }
+  }
+  public beginTrading(): void {
+    this.dataService.generateRandomStockPrice();
+    
+  }
+  public stopTrading(): void {
+    this.dataService.stopGeneratingRandomStockPrice();
   }
 }
