@@ -1,10 +1,22 @@
-<app-chart #chartComponent></app-chart>
 <div>
-    <div>
+    <h3 class="stock-price-title">NSE INDEX STOCK PRICE:
+        <span [ngClass]="[isGain ? 'gain': 'loss']">{{stockPrice | number:'1.2-2'}}</span>
+        <span [ngClass]="[isGain ? 'gain': 'loss']">({{stockPriceChange | number:'1.2-2'}})</span>
+        <span [ngClass]="[isGain ? 'gain': 'loss']">{{isGain ? '▲' : '▼'}}</span>
+    </h3>
+</div>
+<app-chart #chartComponent [triggerPriceHit]="triggerPriceHit" (stockPriceUpdated)="onStockPriceUpdated($event)"></app-chart>
+<div class="controls-row">
+    <div class="controls-left">
         <button class="begin-trading-day-button" (click)="beginTradingDay()">Begin Trading Day</button>
-    </div>
-    <div>
         <button class="stop-trading-day-button" (click)="stopTradingDay()">Stop Trading Day</button>
     </div>
+    <div class="controls-right">
+        <span>set trigger price</span>
+        <input type="number" class="trigger-price-input" [(ngModel)]="triggerPrice" placeholder="Price" step="0.01" min="0" />
+    </div>
+</div>
+<div class="trigger-price-message" *ngIf="triggerPrice">Your Trigger Price been set to {{triggerPrice}}
+    <span *ngIf="triggerPriceHit">It got hit</span>
 </div>
 

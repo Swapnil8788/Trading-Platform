@@ -1,5 +1,47 @@
 
-.begin-trading-day-button{
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 10px 20px;
+}
+.controls-left {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.controls-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.trigger-price-input {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 120px;
+    box-sizing: border-box;
+}
+.trigger-price-input:focus {
+    outline: none;
+    border-color: darkblue;
+}
+.add-trigger-price-button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+.add-trigger-price-button:hover {
+    background-color: #00008bcc;
+}
+.begin-trading-day-button {
     background-color: green;
     color: white;
     border: none;
@@ -8,12 +50,8 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
 }
-.stop-trading-day-button{
+.stop-trading-day-button {
     background-color: red;
     color: white;
     border: none;
@@ -22,7 +60,38 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+}
+.stock-price-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: darkblue;
+    text-align: left;
     margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.arrow {
+    margin-left: 0.25em;
+    font-size: 0.9em;
+}
+.gain{
+    color: green;
+}
+.loss{
+    color: red;
+}
+.neutral{
+    color: gray;
+}
+.trigger-price-message{
+    font-size: 16px;
+    font-weight: bold;
+    color: darkblue;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;

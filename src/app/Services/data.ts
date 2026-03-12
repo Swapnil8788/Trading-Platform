@@ -12,7 +12,9 @@ export class Data {
   
 
   generateRandomStockPrice(): void {
-   
+   if(this.intervalId){
+    return;
+   }
     this.intervalId = setInterval(() => {
       const lastPrice = this.stockPriceSubject.value;
       let randomPrice: number;
@@ -26,5 +28,6 @@ export class Data {
   }
   stopGeneratingRandomStockPrice(): void{
     clearInterval(this.intervalId);
+    this.intervalId = null
   }
 }

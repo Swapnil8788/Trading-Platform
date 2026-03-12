@@ -4,29 +4,38 @@ import {
   ElementRef,
   AfterViewInit,
   OnDestroy,
+  EventEmitter,
+  Output,
+  Input,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Chart } from 'chart.js/auto';
 import type { ChartConfiguration } from 'chart.js';
 import { Data } from '../../../Services/data';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-chart',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './chart.html',
   styleUrl: './chart.scss',
 })
 export class ChartComponent implements AfterViewInit, OnDestroy {
+  @Input() triggerPriceHit: boolean = false;
+  @Output() stockPriceUpdated = new EventEmitter<number>();
   startTime: Date = new Date(new Date().setHours(9,30,10,0));
-  
+  private stockPriceSubscription?: Subscription;
+
   constructor(private dataService: Data) {}
 
   ngOnInit(): void {
-    this.dataService.stockPrice$.subscribe((price)=>{
+    this.stockPriceSubscription = this.dataService.stockPrice$.subscribe((price) => {
       this.stockPriceData.push(price);
       this.startTime.setSeconds(this.startTime.getSeconds() + 2);
-      this.timeData.push(this.startTime.toLocaleTimeString() + "AM");
-      this.chart?.update();    
-    })
+      this.timeData.push(this.startTime.toLocaleTimeString() + 'AM');
+      this.stockPriceUpdated.emit(price);
+      this.chart?.update();
+    });
   }
 
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
@@ -38,8 +47,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     this.initChart();
   }
 
-  // we need to destroy the chart when the component is destroyed
   ngOnDestroy(): void {
+    this.stockPriceSubscription?.unsubscribe();
     this.chart?.destroy();
   }
 
@@ -84,6 +93,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
           },
           y: {
             display: true,
+            min: 120,
+            max: 175,
             title: {
               display: true,
               text: 'Stock Price',
