@@ -18,4 +18,4 @@ I have used
 
 
 
-Please use node version of 20 and angular version 20 to successfully run the application
+Please use node version of 20-22 and angular version 20 to successfully run the application
