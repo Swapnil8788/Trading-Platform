@@ -15,3 +15,7 @@ I have used
 4. Observables
 5. chart.js
 6. Data binding(parent - child)
+
+
+
+Please use node version of 20 and angular version 20 to successfully run the application
